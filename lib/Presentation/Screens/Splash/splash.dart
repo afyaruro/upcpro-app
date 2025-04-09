@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Config/Routes/Routes.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/SignIn.dart';
 
 class Splash extends StatefulWidget {
@@ -36,7 +37,7 @@ class SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
     Future.delayed(const Duration(seconds: 4), () {
       //si esta logueado manda a la vista principal
-      Navigator.pushReplacement(context, createFadeTransition(const SignIn()));
+      Navigator.pushNamed(context, AppRoutes.login);
     });
   }
 

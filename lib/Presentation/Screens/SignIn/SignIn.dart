@@ -126,15 +126,37 @@ class _SignInState extends State<SignIn> {
                         child: ElevatedButton(
                           onPressed: () async {
                             FocusScope.of(context).unfocus();
+
+                            if (emailController.text.trim() == "" ||
+                                passwordController.text.trim() == "") {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (_) => CustomStatusDialog(
+                                      title: 'Validación',
+                                      message:
+                                          "Por favor, completa todos los campos",
+                                      icon: Icons.error_outline,
+                                      iconColor: Colors.red,
+                                    ),
+                              );
+                              return;
+                            }
+
                             var resp = await storeUser.login(
-                              mail: emailController.text,
-                              password: passwordController.text,
+                              mail: emailController.text.trim(),
+                              password: passwordController.text.trim(),
                             );
 
                             if (resp) {
                               //Iniciar secion y aca debe configurar los niveles, simulacros,
                               // preguntas, preguntas cuestion. todo eso descargarlo de la base
                               // de datos para luego procesarlos.
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "/setup",
+                                (route) => false,
+                              );
                             } else {
                               showDialog(
                                 context: context,
@@ -147,8 +169,6 @@ class _SignInState extends State<SignIn> {
                                     ),
                               );
                             }
-
-                            
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),

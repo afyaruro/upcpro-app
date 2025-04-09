@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Presentation/Screens/Splash/splash.dart';
+import 'package:upcpro_app/Config/Routes/Routes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -7,7 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Splash(),
+      initialRoute: AppRoutes.splash,
+      routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.lime,
