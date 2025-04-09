@@ -1,41 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Presentation/Screens/Splash/splash.dart';
+import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:upcpro_app/Config/Dependency/StartDependecy.dart';
+import 'package:upcpro_app/Config/MyApp/MyApp.dart';
 
 void main() async {
-  
-  // await Hive.initFlutter();
-  // await Hive.openBox('preguntas');
-  // await Hive.openBox('competencia-seleccionada');
-  // await Hive.openBox('nivel-actual');
-  // await Hive.openBox('puntajes');
-  // await Hive.openBox('usuario');
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
 
-  // Get.put(ControllerNiveles());
+  StartDependency startDependency = StartDependency();
+  await Hive.initFlutter();
+  await startDependency.init();
   
   runApp(
     const MyApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const Splash(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 104, 139, 108),
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green,
-        ).copyWith(
-          secondary: const Color.fromARGB(255, 181, 190, 169), // Color de acento
-        ),
-      ),
-
-      
-    );
-  }
-}
