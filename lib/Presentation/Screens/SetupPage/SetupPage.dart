@@ -13,7 +13,7 @@ class _SetupPageState extends State<SetupPage> {
     "Cargando tus preferencias...",
     "Sincronizando información...",
     "Configurando notificaciones...",
-    "¡Listo! Todo está preparado."
+    "¡Listo! Todo está preparado.",
   ];
 
   int _currentIndex = 0;
@@ -27,6 +27,9 @@ class _SetupPageState extends State<SetupPage> {
 
   void _startSetupProcess() async {
     for (int i = 0; i < _messages.length; i++) {
+      //Iniciar secion y aca debe configurar los niveles, simulacros,
+      // preguntas, preguntas cuestion. todo eso descargarlo de la base
+      // de datos para luego procesarlos.
       await Future.delayed(const Duration(seconds: 2));
       if (!mounted) return;
       setState(() {
@@ -41,7 +44,7 @@ class _SetupPageState extends State<SetupPage> {
       });
 
       await Future.delayed(const Duration(seconds: 2));
-      // Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/home");
     }
   }
 
@@ -52,34 +55,40 @@ class _SetupPageState extends State<SetupPage> {
       body: Center(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
-          child: !_finished
-              ? Column(
-                  key: const ValueKey("setup"),
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CircularProgressIndicator(),
-                    const SizedBox(height: 20),
-                    Text(
-                      _messages[_currentIndex],
-                      style: const TextStyle(fontSize: 18),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                )
-              : const Column(
-                  key: ValueKey("done"),
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.check_circle_outline,
-                        color: Colors.green, size: 60),
-                    SizedBox(height: 16),
-                    Text(
-                      "Configuración completa",
-                      style: TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+          child:
+              !_finished
+                  ? Column(
+                    key: const ValueKey("setup"),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(),
+                      const SizedBox(height: 20),
+                      Text(
+                        _messages[_currentIndex],
+                        style: const TextStyle(fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  )
+                  : const Column(
+                    key: ValueKey("done"),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.green,
+                        size: 60,
+                      ),
+                      SizedBox(height: 16),
+                      Text(
+                        "Configuración completa",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
         ),
       ),
     );

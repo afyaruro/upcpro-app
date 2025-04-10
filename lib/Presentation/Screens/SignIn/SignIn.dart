@@ -149,9 +149,7 @@ class _SignInState extends State<SignIn> {
                             );
 
                             if (resp) {
-                              //Iniciar secion y aca debe configurar los niveles, simulacros,
-                              // preguntas, preguntas cuestion. todo eso descargarlo de la base
-                              // de datos para luego procesarlos.
+                              
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
                                 "/setup",

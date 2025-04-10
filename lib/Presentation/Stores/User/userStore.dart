@@ -24,7 +24,6 @@ abstract class _StoreUser with Store {
   Future<bool> login({required String mail, required String password}) async {
     try {
       isLoading = true;
-      print("Hola:");
 
       final userService = GetIt.instance<Userservice>();
 
