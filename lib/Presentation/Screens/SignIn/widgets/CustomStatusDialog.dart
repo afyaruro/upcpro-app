@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class CustomStatusDialog extends StatelessWidget {
   final String title;
@@ -39,16 +40,12 @@ class CustomStatusDialog extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style:  textStyle(fontSize: 18, fontWeight: FontWeight.w700 , colortext: iconColor),
             ),
             const SizedBox(height: 8),
             Text(
               message,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: textStyle(fontSize: 15, fontWeight: FontWeight.w500 , colortext: iconColor),
               textAlign: TextAlign.center,
             ),
           ],

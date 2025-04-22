@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx/mobx.dart';
+import 'package:upcpro_app/Presentation/ComponentBase/WidgetBase.dart';
+import 'package:upcpro_app/Presentation/Screens/SignIn/function/SignInFunction.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/widgets/BuildTextField.dart';
-import 'package:upcpro_app/Presentation/Screens/SignIn/widgets/CustomLoadingDialog.dart';
-import 'package:upcpro_app/Presentation/Screens/SignIn/widgets/CustomStatusDialog.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp1.dart';
-import 'package:upcpro_app/Presentation/Stores/User/userStore.dart';
+import 'package:upcpro_app/Application/Stores/User/userStore.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -19,30 +18,13 @@ class _SignInState extends State<SignIn> {
   final TextEditingController passwordController = TextEditingController();
   final storeUser = GetIt.instance<StoreUser>();
 
-  late ReactionDisposer loadingDisposer;
-
   @override
   void initState() {
     super.initState();
-
-    loadingDisposer = reaction<bool>((_) => storeUser.isLoading, (isLoading) {
-      if (isLoading) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => const CustomLoadingDialog(),
-        );
-      } else {
-        if (Navigator.of(context).canPop()) {
-          Navigator.of(context).pop();
-        }
-      }
-    });
   }
 
   @override
   void dispose() {
-    loadingDisposer();
     super.dispose();
   }
 
@@ -50,13 +32,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(0, 8, 8, 8),
-      body: GestureDetector(
-        onTap: () {
-          final FocusScopeNode focus = FocusScope.of(context);
-          if (!focus.hasPrimaryFocus && focus.hasFocus) {
-            FocusManager.instance.primaryFocus?.unfocus();
-          }
-        },
+      body: WidgetBase(
         child: Stack(
           children: [
             SizedBox.expand(
@@ -125,48 +101,12 @@ class _SignInState extends State<SignIn> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () async {
-                            FocusScope.of(context).unfocus();
-
-                            if (emailController.text.trim() == "" ||
-                                passwordController.text.trim() == "") {
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (_) => CustomStatusDialog(
-                                      title: 'Validación',
-                                      message:
-                                          "Por favor, completa todos los campos",
-                                      icon: Icons.error_outline,
-                                      iconColor: Colors.red,
-                                    ),
-                              );
-                              return;
-                            }
-
-                            var resp = await storeUser.login(
-                              mail: emailController.text.trim(),
+                            SignInFunction.Login(
+                              context: context,
+                              correo: emailController.text.trim(),
                               password: passwordController.text.trim(),
+                              userStore: storeUser,
                             );
-
-                            if (resp) {
-                              
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                "/setup",
-                                (route) => false,
-                              );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder:
-                                    (_) => CustomStatusDialog(
-                                      title: 'Error',
-                                      message: storeUser.message,
-                                      icon: Icons.error_outline,
-                                      iconColor: Colors.red,
-                                    ),
-                              );
-                            }
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),

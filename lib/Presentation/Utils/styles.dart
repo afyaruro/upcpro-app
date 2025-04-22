@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const TextStyle styleTextSplash = TextStyle(
   fontSize: 30.0,
@@ -6,28 +7,25 @@ const TextStyle styleTextSplash = TextStyle(
   color: Color.fromARGB(255, 255, 255, 255),
 );
 
-bgPrincipal() {
-  return const Color.fromARGB(255, 21, 83, 29);
-}
-
-bg() {
-  return const Color.fromARGB(255, 255, 255, 255);
-}
-
-primaryColor() {
-  return Color.fromARGB(255, 21, 83, 29);
-}
-
-secondaryColor() {
-  return const Color.fromARGB(255, 187, 41, 41);
-}
-
-marginBtn(){
+marginBtn() {
   return const EdgeInsets.only(bottom: 5);
 }
 
-colorWhite() {
-  return const Color.fromARGB(255, 255, 255, 255);
+textStyle({
+  required double fontSize,
+  required FontWeight fontWeight,
+  required Color colortext,
+}) {
+  //quiero mejor una fuente descargada
+  return GoogleFonts.krub(
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    color: colortext,
+  );
+}
+
+colorText() {
+  return Color.fromARGB(221, 36, 35, 35);
 }
 
 paddingDefauld() {

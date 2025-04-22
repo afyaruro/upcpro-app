@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:upcpro_app/Presentation/Screens/Home/Home.dart';
-import 'package:upcpro_app/Presentation/Screens/Ranking/Ranking.dart';
+import 'package:upcpro_app/Presentation/Screens/Perfil/ProfileScreen.dart';
+import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroScreen.dart';
+import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroScreen1.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class BottomMenu extends StatefulWidget {
@@ -15,58 +18,44 @@ class _BottomMenuState extends State<BottomMenu> {
 
   final List<Widget> _screens = [
     const Home(),
-    const Home(),
-    RankingScreen(),
-    const Home(),
-    // SimulacrosScreen(),
-    // RankingScreen(),
-    // const ProfileScreen(),
+    const SimulacroScreen(),
+    const SimulacroScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.white,
       body: _screens[_currentIndex],
       bottomNavigationBar: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         width: fullWidth(context),
-        height: 80,
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        height: 60,
+
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(31, 87, 87, 87),
-              offset: Offset(0, -2),
-              blurRadius: 4,
-              spreadRadius: 0,
+              // ignore: deprecated_member_use
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, 5),
+              blurRadius: 15,
             ),
           ],
+          color: const Color.fromARGB(255, 255, 255, 255),
+          borderRadius: BorderRadius.circular(50),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildMenuItem(
-                index: 0,
-                icon: Icons.home_outlined,
-                label: "Home",
-              ),
-              _buildMenuItem(
-                index: 1,
-                icon: Icons.edit_outlined,
-                label: "Simulacros",
-              ),
-              _buildMenuItem(
-                index: 2,
-                icon: Icons.workspace_premium_outlined,
-                label: "Ranking",
-              ),
-              _buildMenuItem(
-                index: 3,
-                icon: Icons.person_outline,
-                label: "Perfil",
-              ),
+              _buildMenuItem(index: 0, icon: "assets/home_icon.svg"),
+              _buildMenuItem(index: 1, icon: "assets/simulacro_icon.svg"),
+              _buildMenuItem(index: 2, icon: "assets/certificate.svg"),
+              _buildMenuItem(index: 3, icon: "assets/setting_icon.svg"),
             ],
           ),
         ),
@@ -74,11 +63,7 @@ class _BottomMenuState extends State<BottomMenu> {
     );
   }
 
-  Widget _buildMenuItem({
-    required int index,
-    required IconData icon,
-    required String label,
-  }) {
+  Widget _buildMenuItem({required int index, required String icon}) {
     final isSelected = _currentIndex == index;
     return GestureDetector(
       onTap: () {
@@ -89,31 +74,25 @@ class _BottomMenuState extends State<BottomMenu> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
-        padding:
-            isSelected
-                ? const EdgeInsets.symmetric(horizontal: 20, vertical: 2)
-                : EdgeInsets.zero,
-        decoration: BoxDecoration(
-          color: isSelected ? const Color.fromARGB(255, 158, 220, 57) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.lime : Colors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: AnimatedScale(
+            scale: isSelected ? 1.1 : 1.0,
+            duration: const Duration(milliseconds: 400),
+            child: SvgPicture.asset(
               icon,
-              color:
-                  isSelected ? Colors.white : Color.fromARGB(255, 0, 0, 0),
-            ),
-            Text(
-              label,
-              style: TextStyle(
-                color:
-                    isSelected ? Colors.white : Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w500,
+              width: 25,
+              height: 25,
+              colorFilter: ColorFilter.mode(
+                isSelected ? Colors.white : colorText(),
+                BlendMode.srcIn,
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

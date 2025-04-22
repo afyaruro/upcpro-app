@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Config/Routes/Routes.dart';
-import 'package:upcpro_app/Presentation/Screens/SignIn/SignIn.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:upcpro_app/Application/Services/Init/InitService.dart';
+import 'package:upcpro_app/Application/Stores/User/userStore.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -12,6 +14,7 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation _fadeAnimation;
+  final storeUser = GetIt.instance<StoreUser>();
 
   @override
   void dispose() {
@@ -35,9 +38,26 @@ class SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
     _controller.repeat(reverse: true);
 
-    Future.delayed(const Duration(seconds: 4), () {
-      //si esta logueado manda a la vista principal
-      Navigator.pushNamed(context, AppRoutes.login);
+    Future.delayed(const Duration(seconds: 4), () async {
+       Box boxConfig = await Hive.openBox('config');
+          Box boxFaculty = await Hive.openBox('faculty');
+          Box boxCompetence = await Hive.openBox('competence');
+          Box boxProgram = await Hive.openBox('program');
+          Box boxQuestion = await Hive.openBox('question');
+          Box boxInfoQuestion = await Hive.openBox('infoQuestion');
+          Box boxSimulacro = await Hive.openBox('Simulacro');
+
+
+          InitService service = InitService(context: context);
+          await service.Init(
+            boxCompetence: boxCompetence,
+            boxConfig: boxConfig,
+            boxFaculty: boxFaculty,
+            boxProgram: boxProgram,
+            boxInfoquestion: boxInfoQuestion,
+            boxQuestion: boxQuestion,
+            boxSimulacro: boxSimulacro
+          );
     });
   }
 
@@ -88,6 +108,7 @@ class SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
+      
     );
   }
 }

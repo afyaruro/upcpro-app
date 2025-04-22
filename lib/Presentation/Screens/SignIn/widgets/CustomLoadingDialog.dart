@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class CustomLoadingDialog extends StatelessWidget {
   const CustomLoadingDialog({super.key});
@@ -12,24 +13,20 @@ class CustomLoadingDialog extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children:  [
             CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.lime),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
               strokeWidth: 3,
             ),
             SizedBox(height: 20),
             Text(
               'Cargando...',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: textStyle(fontSize: 15, fontWeight: FontWeight.w700 , colortext: const Color.fromARGB(255, 31, 30, 30)),
             ),
             SizedBox(height: 8),
             Text(
               'Por favor espera un momento',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              style: textStyle(fontSize: 15, fontWeight: FontWeight.w500 , colortext: const Color.fromARGB(255, 31, 30, 30)),
             ),
           ],
         ),
