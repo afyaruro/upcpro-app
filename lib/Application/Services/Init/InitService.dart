@@ -50,14 +50,19 @@ class InitService {
     await storeGeneric.getPrograms(boxProgram);
 
     if (storeUser.token != "" && storeUser.user != null) {
-
       await storeGeneric.getCompetence(boxCompetence);
 
+      final simulacroService = GetIt.instance<SimulacroService>();
 
-    final simulacroService = GetIt.instance<SimulacroService>();
+      boxSimulacro.clear();
 
-      var respSimulacroDio = await simulacroService.getSimulacroDio(storeUser.token);
-      await simulacroService.saveSimulacrosHive(SimulacroEntity.toListModel(respSimulacroDio.entities!), boxSimulacro);
+      var respSimulacroDio = await simulacroService.getSimulacroDio(
+        storeUser.token,
+      );
+      await simulacroService.saveSimulacrosHive(
+        SimulacroEntity.toListModel(respSimulacroDio.entities!),
+        boxSimulacro,
+      );
       await storeGeneric.getSimulacros(boxSimulacro);
 
       // aca se cargan certificados, ranking etc. aca el resto  pero esto es al loguearse no aca al igual al registrase

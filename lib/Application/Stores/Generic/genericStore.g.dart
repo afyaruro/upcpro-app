@@ -73,6 +73,23 @@ mixin _$StoreGeneric on _StoreGeneric, Store {
     });
   }
 
+  late final _$isRefreshingSimulacroAtom =
+      Atom(name: '_StoreGeneric.isRefreshingSimulacro', context: context);
+
+  @override
+  bool get isRefreshingSimulacro {
+    _$isRefreshingSimulacroAtom.reportRead();
+    return super.isRefreshingSimulacro;
+  }
+
+  @override
+  set isRefreshingSimulacro(bool value) {
+    _$isRefreshingSimulacroAtom.reportWrite(value, super.isRefreshingSimulacro,
+        () {
+      super.isRefreshingSimulacro = value;
+    });
+  }
+
   late final _$getFacultiesAsyncAction =
       AsyncAction('_StoreGeneric.getFaculties', context: context);
 
@@ -111,7 +128,8 @@ mixin _$StoreGeneric on _StoreGeneric, Store {
 faculties: ${faculties},
 competences: ${competences},
 programs: ${programs},
-simulacros: ${simulacros}
+simulacros: ${simulacros},
+isRefreshingSimulacro: ${isRefreshingSimulacro}
     ''';
   }
 }

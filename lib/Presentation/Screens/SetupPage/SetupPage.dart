@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:upcpro_app/Application/Services/User/UserService.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});

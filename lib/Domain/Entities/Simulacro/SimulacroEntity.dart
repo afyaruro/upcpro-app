@@ -6,6 +6,8 @@ class SimulacroEntity {
   final int numeroPreguntas;
   final DateTime fechaLimite;
   final DateTime dateUpdate;
+  final String type;
+  late String? name;
 
   SimulacroEntity({
     required this.id,
@@ -13,6 +15,8 @@ class SimulacroEntity {
     required this.numeroPreguntas,
     required this.fechaLimite,
     required this.dateUpdate,
+    required this.type,
+    this.name,
   });
 
   SimulacroModel toModel() {
@@ -22,6 +26,7 @@ class SimulacroEntity {
       fechaLimite: fechaLimite,
       numeroPreguntas: numeroPreguntas,
       dateUpdate: dateUpdate,
+      type: type,
     );
   }
 

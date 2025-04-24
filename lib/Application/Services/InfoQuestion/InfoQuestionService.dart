@@ -29,4 +29,12 @@ class InfoQuestionService {
   ) async {
     return await repository.saveInfoQuestionsHive(infoQuestions, box);
   }
+
+  Future<InfoQuestionEntity> getInfoQuestionsHive(
+    String question,
+    Box box,
+  ) async {
+    var respModel = await repository.getInfoQuestionsHive(question, box);
+    return respModel.toEntity();
+  }
 }

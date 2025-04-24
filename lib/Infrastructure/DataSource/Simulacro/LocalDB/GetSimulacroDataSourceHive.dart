@@ -12,7 +12,7 @@ class GetSimulacroDataSourceHive {
       final simulacrosModel = SimulacroModel.toListModel(simulacros);
 
       return ResponseEntity.listSingle(
-        message: "Simulacroas obtenidas",
+        message: "Simulacros obtenidas",
         entities: simulacrosModel,
       );
     } catch (e) {

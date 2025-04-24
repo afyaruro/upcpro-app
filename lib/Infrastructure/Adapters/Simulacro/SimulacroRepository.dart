@@ -4,6 +4,7 @@ import 'package:upcpro_app/Domain/Ports/Simulacro/ISimulacroRepository.dart';
 import 'package:upcpro_app/Domain/Responses/Response.dart';
 import 'package:upcpro_app/Infrastructure/DataSource/Simulacro/LocalDB/GetSimulacroDataSourceHive.dart';
 import 'package:upcpro_app/Infrastructure/DataSource/Simulacro/LocalDB/SaveSimulacroDatasourceHive.dart';
+import 'package:upcpro_app/Infrastructure/DataSource/Simulacro/Peticiones/GenerarSimulacroDataSourceDio.dart';
 import 'package:upcpro_app/Infrastructure/DataSource/Simulacro/Peticiones/GetSimulacroDataSourceDio.dart';
 import 'package:upcpro_app/Infrastructure/Models/Simulacro/SimulacroModel.dart';
 
@@ -14,9 +15,7 @@ class SimulacroRepository implements ISimulacroRepository {
 
   @override
   Future<ResponseEntity<SimulacroModel>> getSimulacroDio(String token) async {
-    return await GetSimulacroDataSourceDio(
-      dio: dio,
-    ).getSimulacros(token);
+    return await GetSimulacroDataSourceDio(dio: dio).getSimulacros(token);
   }
 
   @override
@@ -31,10 +30,14 @@ class SimulacroRepository implements ISimulacroRepository {
   ) async {
     return await SaveSimulacroDataSourceHive().saveSimulacros(simulacros, box);
   }
-  
+
   @override
-  Future<ResponseEntity<SimulacroModel>> generarSimulacroDio() {
-    // TODO: implement generarSimulacroDio
-    throw UnimplementedError();
+  Future<ResponseEntity<String>> generarSimulacroDio({
+    required String id,
+    required String token,
+  }) async {
+    return await GenerarSimulacroDataSourceDio(
+      dio: dio,
+    ).generarSimulacro(id, token);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:upcpro_app/Application/Services/Certificado/CertificadoService.dart';
 import 'package:upcpro_app/Application/Services/Competence/CompetenceService.dart';
 import 'package:upcpro_app/Application/Services/Faculty/FacultyService.dart';
 import 'package:upcpro_app/Application/Services/InfoQuestion/InfoQuestionService.dart';
@@ -20,5 +21,6 @@ class PersistenceService {
     di.registerLazySingleton(() => UserService(repository: di()));
     di.registerLazySingleton(() => SendCodeService(sendMail: di()));
     di.registerLazySingleton(() => SimulacroService(repository: di()));
+    di.registerLazySingleton(() => CertificadoService(repository: di()));
   }
 }

@@ -1,7 +1,9 @@
 // lib/routes/app_routes.dart
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
 import 'package:upcpro_app/Domain/Entities/User/UserEntity.dart';
 import 'package:upcpro_app/Presentation/Screens/BottomNav/BottomNav.dart';
+import 'package:upcpro_app/Presentation/Screens/Question/QuestionScreen.dart';
 import 'package:upcpro_app/Presentation/Screens/SetupPage/SetupPage.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/SignIn.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/ConfigCuenta.dart';
@@ -11,6 +13,7 @@ import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp3.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp4.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp5.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp6.dart';
+import 'package:upcpro_app/Presentation/Screens/Simulacro/GenerandoSimulacro.dart';
 import 'package:upcpro_app/Presentation/Screens/Splash/splash.dart';
 
 class AppRoutes {
@@ -25,6 +28,8 @@ class AppRoutes {
   static const String signup5 = '/signup5';
   static const String signup6 = '/signup6';
   static const String createCuenta = '/creating';
+  static const String generandoSimulacro = '/generando-simulacro';
+  static const String question = '/question';
 
   static Map<String, WidgetBuilder> routes = {
     login: (context) => const SignIn(),
@@ -117,6 +122,20 @@ class AppRoutes {
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       final user = args['user'] as UserEntity;
       return CreatingCuenta(user: user);
+    },
+
+    generandoSimulacro: (context) {
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final simulacro = args['simulacro'] as SimulacroEntity;
+      return GenerandoSimulacro(simulacro: simulacro);
+    },
+
+    question: (context) {
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final position = args['position'] as int;
+      return QuestionScreen(position: position);
     },
   };
 }

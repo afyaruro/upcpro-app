@@ -7,7 +7,10 @@ abstract class ISimulacroRepository {
 
   Future<bool> saveSimulacrosHive(List<SimulacroModel> simulacros, Box box);
 
-  Future<ResponseEntity<SimulacroModel>> generarSimulacroDio();
+  Future<ResponseEntity<String>> generarSimulacroDio({
+    required String id,
+    required String token,
+  });
 
   Future<ResponseEntity<SimulacroModel>> getSimulacroDio(String token);
 }

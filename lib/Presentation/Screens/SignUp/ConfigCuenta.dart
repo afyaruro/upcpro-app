@@ -50,7 +50,7 @@ class _CreatingCuentaState extends State<CreatingCuenta> {
     try {
       var resp = await storeUser.createUser(user: widget.user);
       if (resp) {
-        Box boxSimulacro = await Hive.openBox('Simulacro');
+        Box boxSimulacro = await Hive.openBox('simulacro');
 
         var respSimulacro = await simulacroService.getSimulacroDio(
           storeUser.token,

@@ -11,9 +11,9 @@ class QuestionModel {
   final String optionD;
   final int correctAnswer;
   final String typeQuestion;
-  final String idInfoQuestion;
+  final String? idInfoQuestion;
   final String idCompetence;
-  final DateTime dateUpdate;
+  final DateTime? dateUpdate;
 
   QuestionModel({
     required this.id,
@@ -80,14 +80,14 @@ class QuestionModel {
       enunciated: enunciated,
       feedback: feedback,
       idCompetence: idCompetence,
-      idInfoQuestion: idInfoQuestion,
+      idInfoQuestion: idInfoQuestion!,
       optionA: optionA,
       optionB: optionB,
       optionC: optionC,
       optionD: optionD,
       optionType: optionType,
       typeQuestion: typeQuestion,
-      dateUpdate: dateUpdate,
+      dateUpdate: dateUpdate!,
     );
   }
 

@@ -10,5 +10,8 @@ abstract class IQuestionRepository {
 
   Future<bool> saveQuestionsHive(List<QuestionModel> questions, Box box);
 
+  Future<List<QuestionModel>> getQuestionsHive(List<String> questions, Box box);
+
+
 
 }

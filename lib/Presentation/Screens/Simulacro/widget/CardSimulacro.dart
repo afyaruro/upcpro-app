@@ -31,7 +31,6 @@ class _CardSimulacroState extends State<CardSimulacro> {
   Duration get _timeRemaining {
     final now = DateTime.now();
     final difference = widget.simulacro.fechaLimite.difference(now);
-    print("diference: $difference");
     return difference.isNegative ? Duration.zero : difference;
   }
 
@@ -64,7 +63,6 @@ class _CardSimulacroState extends State<CardSimulacro> {
       );
     } else {
       final hours = remaining.inHours;
-      print("hours: $remaining");
       final color = Colors.red;
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -128,20 +126,36 @@ class _CardSimulacroState extends State<CardSimulacro> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Fila superior con ID y botón de inicio.
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.simulacro.id,
-                  style: textStyle(
-                    colortext: colorText(),
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14.0,
+                Expanded(
+                  child: Text(
+                    widget.simulacro.name == null ? "" : widget.simulacro.name!,
+                    overflow: TextOverflow.ellipsis,
+                    style: textStyle(
+                      colortext: colorText(),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14.0,
+                    ),
                   ),
                 ),
+                SizedBox(width: 10),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   "/generando-simulacro",
+                    //   (route) => false,
+                    //   arguments: {'simulacro': widget.simulacro},
+                    // );
+
+                    Navigator.pushNamed(
+                      context,
+                      '/generando-simulacro',
+                      arguments: {'simulacro': widget.simulacro},
+                    );
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.lime,

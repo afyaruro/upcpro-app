@@ -27,6 +27,9 @@ abstract class _StoreGeneric with Store {
   @observable
   List<SimulacroEntity> simulacros = [];
 
+  @observable
+  bool isRefreshingSimulacro = false;
+
   @action
   Future getFaculties(Box box) async {
     final service = GetIt.instance<FacultyService>();
@@ -54,5 +57,4 @@ abstract class _StoreGeneric with Store {
     var resp = await service.getSimulacroHive(box);
     simulacros = resp.entities!;
   }
-  
 }

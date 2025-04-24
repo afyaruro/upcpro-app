@@ -45,7 +45,7 @@ class SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           Box boxProgram = await Hive.openBox('program');
           Box boxQuestion = await Hive.openBox('question');
           Box boxInfoQuestion = await Hive.openBox('infoQuestion');
-          Box boxSimulacro = await Hive.openBox('Simulacro');
+          Box boxSimulacro = await Hive.openBox('simulacro');
 
 
           InitService service = InitService(context: context);

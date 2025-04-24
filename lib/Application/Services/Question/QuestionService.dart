@@ -14,7 +14,7 @@ class QuestionService {
     ResponseEntity<QuestionEntity> responseEntity = ResponseEntity.empty();
     responseEntity.entities = QuestionEntity.toListEntity(
       respModel.entities ?? [],
-    ); 
+    );
     responseEntity.message = respModel.message;
     responseEntity.isError = respModel.isError;
     responseEntity.pages = respModel.pages;
@@ -23,5 +23,13 @@ class QuestionService {
 
   Future<bool> saveQuestionHive(List<QuestionModel> questions, Box box) async {
     return await repository.saveQuestionsHive(questions, box);
+  }
+
+  Future<List<QuestionEntity>> getQuestionsHive(
+    List<String> questions,
+    Box box,
+  ) async {
+    var resp = await repository.getQuestionsHive(questions, box);
+    return QuestionEntity.toListEntity(resp);
   }
 }

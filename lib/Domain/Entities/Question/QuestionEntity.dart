@@ -1,3 +1,4 @@
+import 'package:upcpro_app/Domain/Entities/InfoQuestion/InfoQuestionEntity.dart';
 import 'package:upcpro_app/Infrastructure/Models/Question/QuestionModel.dart';
 
 class QuestionEntity {
@@ -11,9 +12,11 @@ class QuestionEntity {
   final String optionD;
   final int correctAnswer;
   final String typeQuestion;
-  final String idInfoQuestion;
+  final String? idInfoQuestion;
   final String idCompetence;
-  final DateTime dateUpdate;
+  final DateTime? dateUpdate;
+
+  late InfoQuestionEntity? infoQuestion;
 
   QuestionEntity({
     required this.id,
@@ -29,6 +32,7 @@ class QuestionEntity {
     required this.idInfoQuestion,
     required this.idCompetence,
     required this.dateUpdate,
+    this.infoQuestion,
   });
 
   QuestionModel toModel() {

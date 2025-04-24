@@ -1,20 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:upcpro_app/Infrastructure/Config/env/env.dart';
 import 'package:upcpro_app/Domain/Responses/Response.dart';
-import 'package:upcpro_app/Infrastructure/Models/Simulacro/SimulacroModel.dart';
 
-class GetSimulacroDataSourceDio {
+class GenerarSimulacroDataSourceDio {
   final Dio dio;
 
-  GetSimulacroDataSourceDio({required this.dio});
+  GenerarSimulacroDataSourceDio({required this.dio});
 
-  Future<ResponseEntity<SimulacroModel>> getSimulacros(String token) async {
+  Future<ResponseEntity<String>> generarSimulacro(
+    String id,
+    String token,
+  ) async {
     try {
-      final fechaActual = DateTime.now().toUtc().toIso8601String();
-
       final response = await dio.post(
-        "$URLBASE/api/simulacro/get-all-active",
-        data: {"fechaActual": fechaActual},
+        "$URLBASE/api/simulacro/generar-simulacro",
+        data: {"id": id},
         options: Options(
           headers: {
             "accept": "*/*",
@@ -28,13 +28,11 @@ class GetSimulacroDataSourceDio {
       final Map<String, dynamic> result = response.data;
 
       if (response.statusCode == 200) {
-        List<SimulacroModel> programs = SimulacroModel.toListModel(
-          result['data'],
-        );
+        List<String> stringList = List<String>.from(result['data']);
 
         return ResponseEntity.listSingle(
           message: result['message'],
-          entities: programs,
+          entities: stringList,
         );
       } else {
         if (response.statusCode == 401) {

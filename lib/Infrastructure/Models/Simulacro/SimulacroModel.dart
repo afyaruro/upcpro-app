@@ -6,6 +6,7 @@ class SimulacroModel {
   final int numeroPreguntas;
   final DateTime fechaLimite;
   final DateTime dateUpdate;
+  final String type;
 
   SimulacroModel({
     required this.id,
@@ -13,6 +14,7 @@ class SimulacroModel {
     required this.numeroPreguntas,
     required this.fechaLimite,
     required this.dateUpdate,
+    required this.type,
   });
 
   factory SimulacroModel.fromJson(Map<dynamic, dynamic> json) {
@@ -28,6 +30,7 @@ class SimulacroModel {
           json['dateUpdate'] is String
               ? DateTime.parse(json['dateUpdate'])
               : json['dateUpdate'] as DateTime,
+      type: json['type'] as String? ?? "",
     );
   }
 
@@ -38,6 +41,7 @@ class SimulacroModel {
       fechaLimite: fechaLimite,
       numeroPreguntas: numeroPreguntas,
       dateUpdate: dateUpdate,
+      type: type,
     );
   }
 
@@ -48,6 +52,7 @@ class SimulacroModel {
       "fechaLimite": fechaLimite,
       "numeroPreguntas": numeroPreguntas,
       "dateUpdate": dateUpdate,
+      "type": type,
     };
   }
 

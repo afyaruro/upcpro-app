@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:upcpro_app/Presentation/Screens/Home/Home.dart';
 import 'package:upcpro_app/Presentation/Screens/Perfil/ProfileScreen.dart';
 import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroScreen.dart';
-import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroScreen1.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class BottomMenu extends StatefulWidget {
