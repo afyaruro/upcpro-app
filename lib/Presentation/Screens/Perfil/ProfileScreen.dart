@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upcpro_app/Presentation/Screens/Perfil/widget/BuildOptionsList.dart';
+import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -7,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(239, 0, 0, 0),
+      backgroundColor: backgroundColor(),
       body: SingleChildScrollView(
         child: Column(
           children: [

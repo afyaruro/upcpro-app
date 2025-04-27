@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class CardSimulacro extends StatefulWidget {

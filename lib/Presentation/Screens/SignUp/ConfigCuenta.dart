@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:upcpro_app/Application/Services/Simulacro/SimulacroService.dart';
 import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Application/Stores/User/userStore.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Domain/Entities/User/UserEntity.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 

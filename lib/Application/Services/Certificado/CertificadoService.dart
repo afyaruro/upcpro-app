@@ -15,14 +15,20 @@ class CertificadoService {
   }
 
   Future<CertificadoEntity?> getSimulacroActivo(Box box) async {
-   
     final simulacroActivo = await repository.getSimulacroActivo(box);
-    
+
     if (simulacroActivo != null) {
       return simulacroActivo.toEntity();
     }
 
     return null;
+  }
+
+  Future<bool> saveDioCertificado(
+    CertificadoEntity certificado,
+    String token,
+  ) async {
+    return await repository.saveCertificadoDio(certificado.toModel(), token);
   }
 
   // falta el eliminar pero solo el activo es decir o cuando ya la fecha pase o cuando

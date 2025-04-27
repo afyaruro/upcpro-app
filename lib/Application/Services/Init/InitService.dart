@@ -5,7 +5,7 @@ import 'package:upcpro_app/Application/Services/Simulacro/SimulacroService.dart'
 import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Application/Stores/Init/initStore.dart';
 import 'package:upcpro_app/Application/Stores/User/userStore.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Infrastructure/Config/Routes/Routes.dart';
 
 class InitService {

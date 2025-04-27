@@ -1,4 +1,4 @@
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 
 class SimulacroModel {
   final String id;

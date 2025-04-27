@@ -9,7 +9,9 @@ import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Application/Stores/User/userStore.dart';
 import 'package:upcpro_app/Domain/Entities/RespuestaSimulacro/CertificadoEntity.dart';
 import 'package:upcpro_app/Domain/Entities/RespuestaSimulacro/RespuestaPreguntaEntity.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
+import 'package:upcpro_app/Infrastructure/Config/Routes/Routes.dart';
+import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class GenerandoSimulacro extends StatefulWidget {
   const GenerandoSimulacro({super.key, required this.simulacro});
@@ -143,7 +145,7 @@ class _GenerandoSimulacroState extends State<GenerandoSimulacro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: backgroundColor(),
       body: Observer(
         builder:
             (_) => Center(
@@ -182,7 +184,10 @@ class _GenerandoSimulacroState extends State<GenerandoSimulacro> {
                           ? 'El simulacro se ha generado exitosamente'
                           : "Hemos presentado errores al generar el simulacro",
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[400], fontSize: 16),
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 16,
+                      ),
                     ),
 
                     SizedBox(height: 50),
@@ -192,13 +197,14 @@ class _GenerandoSimulacroState extends State<GenerandoSimulacro> {
                             certificadoStore.initializeTimer(
                               widget.simulacro.duracion,
                             );
-                            Navigator.pushNamed(
+
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
-                              '/question',
+                              AppRoutes.question,
+                              (route) => false,
                               arguments: {'position': 0},
                             );
                           },
-                          child: Text("Continuar"),
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                               Colors.lime,
@@ -207,6 +213,7 @@ class _GenerandoSimulacroState extends State<GenerandoSimulacro> {
                               Colors.white,
                             ),
                           ),
+                          child: const Text("Continuar"),
                         )
                         : Container(),
                   ],

@@ -28,8 +28,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor(),
       body: Container(
-        decoration: const BoxDecoration(color: Color.fromARGB(255, 28, 28, 28)),
+        decoration: BoxDecoration(color: backgroundColor()),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -38,7 +39,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 TimerHeader(
                   initialMinutes:
                       storeCertificado.simulacroActivo!.simulacro.duracion,
-                  position: widget.position, 
+                  position: widget.position,
                   totalQuestions:
                       storeCertificado.simulacroActivo!.listRespuesta.length,
                   onNextPressed: (nextPosition) {

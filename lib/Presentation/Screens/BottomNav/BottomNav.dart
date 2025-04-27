@@ -6,7 +6,8 @@ import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroScreen.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class BottomMenu extends StatefulWidget {
-  const BottomMenu({super.key});
+  final int index;
+  const BottomMenu({super.key, this.index = 0});
 
   @override
   State<BottomMenu> createState() => _BottomMenuState();
@@ -21,6 +22,12 @@ class _BottomMenuState extends State<BottomMenu> {
     const SimulacroScreen(),
     ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.index;
+  }
 
   @override
   Widget build(BuildContext context) {

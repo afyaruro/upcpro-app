@@ -35,6 +35,25 @@ class CertificadoModel {
     this.id,
   });
 
+  Map<dynamic, dynamic> toJsonCertificadoDio() {
+    return {
+      "idSimulacro": simulacro!.id,
+      "duracion": simulacro!.duracion,
+      "fecha": fecha,
+      "numCorrectasCiudadanas": totalCiudadanas,
+      "numCorrectasIngles": totalIngles,
+      "numCorrectasRazonamiento": totalRazonamiento,
+      "numCorrectasLectura": totalLectura,
+      "totalCiudadanas": totalCiudadanas,
+      "totalIngles": totalIngles,
+      "totalRazonamiento": totalRazonamiento,
+      "totalLectura": totalLectura,
+      "puntaje": puntaje,
+      "jsonQuestions":
+          RespuestaPreguntaModel.toJsonList(listRespuesta).toString(),
+    };
+  }
+
   Map<dynamic, dynamic> toJsonSimulacroActivoHive() {
     return {
       "simulacro": simulacro!.toJson(),

@@ -8,7 +8,7 @@ import 'package:upcpro_app/Application/Services/Simulacro/SimulacroService.dart'
 import 'package:upcpro_app/Domain/Entities/Competence/CompetenceEntity.dart';
 import 'package:upcpro_app/Domain/Entities/Faculty/FacultyEntity.dart';
 import 'package:upcpro_app/Domain/Entities/Program/ProgramEntity.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 
 part 'genericStore.g.dart';
 

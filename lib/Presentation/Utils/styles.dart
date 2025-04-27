@@ -11,12 +11,17 @@ marginBtn() {
   return const EdgeInsets.only(bottom: 5);
 }
 
+backgroundColor() {
+  return const Color(0xFF1A1B2F);
+}
+
+
 textStyle({
   required double fontSize,
   required FontWeight fontWeight,
   required Color colortext,
 }) {
-  //quiero mejor una fuente descargada
+  
   return GoogleFonts.krub(
     fontSize: fontSize,
     fontWeight: fontWeight,

@@ -1,6 +1,6 @@
 // lib/routes/app_routes.dart
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Domain/Entities/User/UserEntity.dart';
 import 'package:upcpro_app/Presentation/Screens/BottomNav/BottomNav.dart';
 import 'package:upcpro_app/Presentation/Screens/Question/QuestionScreen.dart';
@@ -14,6 +14,7 @@ import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp4.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp5.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp6.dart';
 import 'package:upcpro_app/Presentation/Screens/Simulacro/GenerandoSimulacro.dart';
+import 'package:upcpro_app/Presentation/Screens/Simulacro/SimulacroCompleteScreen.dart';
 import 'package:upcpro_app/Presentation/Screens/Splash/splash.dart';
 
 class AppRoutes {
@@ -30,6 +31,9 @@ class AppRoutes {
   static const String createCuenta = '/creating';
   static const String generandoSimulacro = '/generando-simulacro';
   static const String question = '/question';
+  static const String simulacroComplete = '/simulacrum-complete';
+  static const String result = '/result';
+
 
   static Map<String, WidgetBuilder> routes = {
     login: (context) => const SignIn(),
@@ -137,5 +141,11 @@ class AppRoutes {
       final position = args['position'] as int;
       return QuestionScreen(position: position);
     },
+
+    simulacroComplete: (context) {
+      return SimulacroCompleteScreen();
+    },
+
+    result: (context) => const BottomMenu(index: 2,),
   };
 }

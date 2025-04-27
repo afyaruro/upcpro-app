@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:upcpro_app/Application/Services/Simulacro/SimulacroService.dart';
 import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Application/Stores/User/userStore.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Presentation/Screens/Simulacro/widget/CardSimulacro.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
@@ -50,8 +50,8 @@ class _SimulacroScreenState extends State<SimulacroScreen> {
                 Container(
                   width: fullWidth(context),
                   height: fullHeight(context) * 0.5,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 41, 41, 41),
+                  decoration:  BoxDecoration(
+                    color: backgroundColor(),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(50),
                       bottomRight: Radius.circular(50),

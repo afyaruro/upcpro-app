@@ -4,7 +4,7 @@ import 'package:upcpro_app/Application/Services/InfoQuestion/InfoQuestionService
 import 'package:upcpro_app/Application/Services/Question/QuestionService.dart';
 import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Domain/Entities/Question/QuestionEntity.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Domain/Ports/Simulacro/ISimulacroRepository.dart';
 import 'package:upcpro_app/Domain/Responses/Response.dart';
 import 'package:upcpro_app/Infrastructure/Models/Simulacro/SimulacroModel.dart';

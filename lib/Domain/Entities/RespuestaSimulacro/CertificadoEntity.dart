@@ -1,12 +1,12 @@
 import 'package:upcpro_app/Domain/Entities/RespuestaSimulacro/RespuestaPreguntaEntity.dart';
-import 'package:upcpro_app/Domain/Entities/Simulacro/SimulacroEntity.dart';
+import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Infrastructure/Models/Certificado/CertificadoModel.dart';
 import 'package:upcpro_app/Infrastructure/Models/Certificado/RespuestaPreguntaModel.dart';
 
 class CertificadoEntity {
   final String? id;
   final SimulacroEntity simulacro;
-  final int? duracion;
+  late int? duracion;
   final DateTime fecha;
   final int? numCorrectasCiudadanas;
   final int? numCorrectasIngles;

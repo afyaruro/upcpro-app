@@ -5,6 +5,9 @@ import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:upcpro_app/Application/Services/Certificado/CertificadoService.dart';
 import 'package:upcpro_app/Application/Stores/Certificado/certificadoStore.dart';
+import 'package:upcpro_app/Infrastructure/Config/Routes/Routes.dart';
+import 'package:upcpro_app/Presentation/ComponentBase/AlertCustomButom.dart';
+import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class TimerHeader extends StatefulWidget {
   final int position;
@@ -50,8 +53,31 @@ class _TimerHeaderState extends State<TimerHeader> {
 
       if (storeCertificado.totalSeconds <= 0) {
         _timer?.cancel();
-        //aca lo saca y guarda el simulacro
-        print("Aca se acabo el tiempo");
+
+        int tiempoUsado =
+            widget.initialMinutes * 60 - storeCertificado.totalSeconds;
+        storeCertificado.simulacroActivo!.duracion = tiempoUsado;
+
+        showDialog(
+          context: context,
+          builder:
+              (context) => AlertCustomButom(
+                title: "¡Tiempo Finalizado!",
+                message: "Tu tiempo se ha acabado",
+                icon: Icons.timer,
+                iconColor: Colors.redAccent,
+                buttonText: "Ver resultados",
+                onButtonPressed: () {
+                  Navigator.of(context).pop();
+
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.simulacroComplete,
+                    (route) => false,
+                  );
+                },
+              ),
+        );
       }
     });
   }
@@ -95,7 +121,6 @@ class _TimerHeaderState extends State<TimerHeader> {
                   onPressed:
                       storeCertificado.optionSelected != 0
                           ? () async {
-                            
                             Box boxSimulacroActive = await Hive.openBox(
                               'simulacroActivo',
                             );
@@ -119,7 +144,19 @@ class _TimerHeaderState extends State<TimerHeader> {
                                     .simulacroActivo!
                                     .listRespuesta
                                     .length) {
-                              print("hola Mundo aca termino el simulacro");
+                              _timer?.cancel();
+
+                              int tiempoUsado =
+                                  widget.initialMinutes * 60 -
+                                  storeCertificado.totalSeconds;
+                              storeCertificado.simulacroActivo!.duracion =
+                                  tiempoUsado;
+
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                AppRoutes.simulacroComplete,
+                                (route) => false,
+                              );
                               return;
                             }
 
@@ -130,12 +167,7 @@ class _TimerHeaderState extends State<TimerHeader> {
                     backgroundColor: Colors.lime,
                     foregroundColor: Colors.white,
                     disabledForegroundColor: Colors.white,
-                    disabledBackgroundColor: const Color.fromARGB(
-                      198,
-                      42,
-                      42,
-                      42,
-                    ),
+                    disabledBackgroundColor: backgroundColor(),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -164,15 +196,22 @@ class _TimerHeaderState extends State<TimerHeader> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.timer, color: Colors.lime, size: 18),
+                      Icon(
+                        Icons.timer,
+                        color:
+                            (storeCertificado.totalSeconds <= 300)
+                                ? Colors.red
+                                : Colors.lime,
+                        size: 18,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         storeCertificado.formattedTime,
                         style: TextStyle(
                           color:
-                              (storeCertificado.totalSeconds <= 30)
+                              (storeCertificado.totalSeconds <= 300)
                                   ? Colors.red
-                                  : Colors.white,
+                                  : Colors.lime,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
