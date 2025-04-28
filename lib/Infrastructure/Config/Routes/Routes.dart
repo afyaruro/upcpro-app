@@ -1,9 +1,11 @@
 // lib/routes/app_routes.dart
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Domain/Entities/RespuestaSimulacro/CertificadoEntity.dart';
 import 'package:upcpro_app/Domain/Entities/Simulacrum/SimulacroEntity.dart';
 import 'package:upcpro_app/Domain/Entities/User/UserEntity.dart';
 import 'package:upcpro_app/Presentation/Screens/BottomNav/BottomNav.dart';
 import 'package:upcpro_app/Presentation/Screens/Question/QuestionScreen.dart';
+import 'package:upcpro_app/Presentation/Screens/QuestionResult/QuestionResultScreen.dart';
 import 'package:upcpro_app/Presentation/Screens/SetupPage/SetupPage.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/SignIn.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/ConfigCuenta.dart';
@@ -32,8 +34,8 @@ class AppRoutes {
   static const String generandoSimulacro = '/generando-simulacro';
   static const String question = '/question';
   static const String simulacroComplete = '/simulacrum-complete';
-  static const String result = '/result';
-
+  static const String exitResult = '/result';
+  static const String result = '/response-question';
 
   static Map<String, WidgetBuilder> routes = {
     login: (context) => const SignIn(),
@@ -143,9 +145,20 @@ class AppRoutes {
     },
 
     simulacroComplete: (context) {
-      return SimulacroCompleteScreen();
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final result = args['result'] as CertificadoEntity;
+      return SimulacroCompleteScreen(result: result);
     },
 
-    result: (context) => const BottomMenu(index: 2,),
+    exitResult: (context) => const BottomMenu(index: 2),
+
+    result: (context) {
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final result = args['result'] as CertificadoEntity;
+      final position = args['position'] as int;
+      return QuestionResultScreen(result: result, position: position);
+    },
   };
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:upcpro_app/Application/Stores/Certificado/certificadoStore.dart';
 import 'package:upcpro_app/Application/Stores/Generic/genericStore.dart';
 import 'package:upcpro_app/Domain/Entities/RespuestaSimulacro/CertificadoEntity.dart';
 import 'package:upcpro_app/Infrastructure/Config/Routes/Routes.dart';
 import 'package:upcpro_app/Presentation/Utils/styles.dart';
 
 class SimulacroCompleteScreen extends StatefulWidget {
-  const SimulacroCompleteScreen({super.key});
+  const SimulacroCompleteScreen({super.key, required this.result});
+
+  final CertificadoEntity result;
 
   @override
   State<SimulacroCompleteScreen> createState() =>
@@ -47,13 +48,12 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
   int _animatedCiudadanas = 0;
 
   late CertificadoEntity simulacrum;
-  final storeCertificado = GetIt.instance<StoreCertificado>();
   final storeGeneric = GetIt.instance<StoreGeneric>();
 
   @override
   void initState() {
     super.initState();
-    simulacrum = storeCertificado.simulacroActivo!;
+    simulacrum = widget.result;
 
     calculatePuntaje();
 
@@ -189,7 +189,7 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRoutes.result,
+                AppRoutes.exitResult,
                 (route) => false,
               );
             },
@@ -295,9 +295,7 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
                 spacing: 10,
                 runSpacing: 10,
                 children: [
-                  puntajeCiudadanas > 0 ||
-                          storeCertificado.simulacroActivo!.simulacro.type ==
-                              "ALL"
+                  puntajeCiudadanas > 0 || simulacrum.simulacro.type == "ALL"
                       ? _buildBadge(
                         color:
                             _animatedCiudadanas < 100
@@ -313,9 +311,7 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
                         value: _animatedCiudadanas,
                       )
                       : SizedBox.shrink(),
-                  puntajeIngles > 0 ||
-                          storeCertificado.simulacroActivo!.simulacro.type ==
-                              "ALL"
+                  puntajeIngles > 0 || simulacrum.simulacro.type == "ALL"
                       ? _buildBadge(
                         color:
                             _animatedIngles < 100
@@ -331,9 +327,7 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
                         value: _animatedIngles,
                       )
                       : SizedBox.shrink(),
-                  puntajeLectura > 0 ||
-                          storeCertificado.simulacroActivo!.simulacro.type ==
-                              "ALL"
+                  puntajeLectura > 0 || simulacrum.simulacro.type == "ALL"
                       ? _buildBadge(
                         color:
                             _animatedLectura < 100
@@ -349,9 +343,7 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
                         value: _animatedLectura,
                       )
                       : SizedBox.shrink(),
-                  puntajeRazonamiento > 0 ||
-                          storeCertificado.simulacroActivo!.simulacro.type ==
-                              "ALL"
+                  puntajeRazonamiento > 0 || simulacrum.simulacro.type == "ALL"
                       ? _buildBadge(
                         color:
                             _animatedRazonamiento < 100
@@ -379,7 +371,13 @@ class _SimulacroCompleteScreenState extends State<SimulacroCompleteScreen>
                     const SizedBox(width: 10),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.result,
+                            arguments: {"result": widget.result, "position": 0},
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.lime,
                           foregroundColor: Colors.white,
