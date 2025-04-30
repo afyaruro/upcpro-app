@@ -36,8 +36,7 @@ class SignUp6 extends StatefulWidget {
 class _SignUp6State extends State<SignUp6> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confPasswordController = TextEditingController();
-    final storeUser = GetIt.instance<StoreUser>();
-
+  final storeUser = GetIt.instance<StoreUser>();
 
   @override
   void initState() {
@@ -133,7 +132,7 @@ class _SignUp6State extends State<SignUp6> {
                   password: passwordController.text.trim(),
                   confPassword: confPasswordController.text.trim(),
                   context: context,
-                  storeUser: storeUser
+                  storeUser: storeUser,
                 );
               },
               name: "Registrarme",

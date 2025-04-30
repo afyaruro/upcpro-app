@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:upcpro_app/Presentation/ComponentBase/WidgetBase.dart';
+import 'package:upcpro_app/Presentation/Screens/SignIn/ForgotPassword.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/function/SignInFunction.dart';
 import 'package:upcpro_app/Presentation/Screens/SignIn/widgets/BuildTextField.dart';
 import 'package:upcpro_app/Presentation/Screens/SignUp/SignUp1.dart';
@@ -17,6 +18,8 @@ class _SignInState extends State<SignIn> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final storeUser = GetIt.instance<StoreUser>();
+  
+  bool _isPasswordVisible = false;
 
   @override
   void initState() {
@@ -38,9 +41,7 @@ class _SignInState extends State<SignIn> {
             SizedBox.expand(
               child: Image.asset("assets/fondo_login.jpg", fit: BoxFit.cover),
             ),
-
             Container(color: const Color.fromARGB(120, 8, 8, 8)),
-
             Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -76,17 +77,54 @@ class _SignInState extends State<SignIn> {
                         icon: Icons.email_outlined,
                       ),
                       const SizedBox(height: 20),
-                      buildTextFieldSingIn(
-                        controller: passwordController,
-                        hintText: "Contraseña",
-                        icon: Icons.lock_outline,
-                        isPassword: true,
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return TextField(
+                            controller: passwordController,
+                            obscureText: !_isPasswordVisible, 
+                            style: const TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              hintText: "Contraseña",
+                              hintStyle: const TextStyle(color: Colors.white),
+                              filled: true,
+                              fillColor: const Color.fromARGB(90, 255, 255, 255),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                                borderSide: BorderSide.none,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock_outline,
+                                color: Colors.white,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordVisible = !_isPasswordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ForgotPassword(),
+                                ),
+                              );
+                            },
                           child: const Text(
                             "¿Olvidaste tu contraseña?",
                             style: TextStyle(
